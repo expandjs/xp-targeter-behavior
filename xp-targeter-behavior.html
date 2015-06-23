@@ -15,8 +15,8 @@ This behavior is used to add targeting capabilities on the context element.
 @group behaviors
 @homepage http://expandjs.com/elements/xp-targeter-behavior
 
-@dependency polymer Polymer/polymer
-@dependency expandjs ExpandJS/expandjs
+@dependency polymer Polymer/polymer#^1.0.4
+@dependency expandjs ExpandJS/expandjs#0.9.1
 -->
 
 <link rel="import" href="../polymer/polymer.html">
@@ -38,7 +38,7 @@ This behavior is used to add targeting capabilities on the context element.
 
             // Finding
             if (XP.isElement(self.target)) { return self.target; }
-            if (XP.isString(self.target, true)) { return XP.getElement('html /deep/ #' + self.target) || null; }
+            if (XP.isString(self.target, true)) { return XP.getElementById(self.target) || null; }
 
             return null;
         },
