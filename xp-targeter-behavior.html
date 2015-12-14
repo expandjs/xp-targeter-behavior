@@ -7,17 +7,19 @@ The complete set of contributors may be found at https://expandjs.github.io/CONT
 -->
 
 <!--
-This behavior is used to add targeting capabilities on the context element.
+A behavior used to add targeting capabilities on a custom element.
 
 @behavior xp-targeter-behavior
-@description A behavior used add targeting capabilities on the context element
-@keywords web app, html5, expandjs, web-components
+@description A behavior used add targeting capabilities on a custom element
+@keywords expandjs, web app, custom elements, web-components
 @group behaviors
+@hot
+
 @homepage http://expandjs.com/elements/xp-targeter-behavior
 @repository https://github.com/ExpandJS/xp-targeter-behavior
 
-@dependency polymer Polymer/polymer#^1.1.0
-@dependency expandjs ExpandJS/expandjs#0.9.11
+@dependency polymer Polymer/polymer#^1.2.0
+@dependency expandjs ExpandJS/expandjs#0.10.0
 -->
 
 <link rel="import" href="../polymer/polymer.html">
@@ -35,11 +37,13 @@ This behavior is used to add targeting capabilities on the context element.
         findTarget: function () {
 
             // Vars
-            var self = this;
+            var self = this,
+                root = self.domHost && Polymer.dom(self.domHost.root);
 
             // Finding
             if (XP.isElement(self.target)) { return self.target; }
-            if (XP.isString(self.target, true)) { return XP.getElementById(self.target) || null; }
+            if (XP.isString(self.target, true) && root) { return root.querySelector('#' + self.target) || null; }
+            if (XP.isString(self.target, true)) { return document.getElementById(self.target) || null; }
 
             return null;
         },
